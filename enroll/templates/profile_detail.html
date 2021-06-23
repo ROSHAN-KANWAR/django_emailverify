@@ -1,0 +1,25 @@
+{% extends 'profile.html'%}
+{% load static %}
+ {% block content1%}
+
+ <h3>User Detail Profile...</h3>
+                {% if request.user.is_authenticated %}
+<div class="row mt-4 p-2">
+<label class="col-md-6 mb-2">  Username :  <b>{{ user.username }}</b></label>
+<label class="col-md-6 mb-2"> Email Id   :  <b>{{ user.email }}</b></label>
+
+<label class="col-md-6 mb-2"> First Name  :  <b>{{ user.first_name}}</b></label>
+
+
+<label class="col-md-6 mb-2"> Last Name :  <b>{{user.last_name}}</b></label>
+
+<label class="col-md-6 mb-2"> Date Joined  :  <b>{{user.date_joined}}</b></label>
+
+<label class="col-md-6 mb-2"> Last Login :  <b>{{user.last_login}}</b></label>
+   </div>
+{%endif%}
+            <p>Welcome, Thanks for logging in.</p>
+
+
+
+{% endblock content1%}

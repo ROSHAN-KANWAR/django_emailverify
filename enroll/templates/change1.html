@@ -1,0 +1,56 @@
+{% extends 'profile.html'%}
+{% load static %}
+{% load widget_tweaks %}
+ {% block content1%}
+
+    <h3 class="mt-3 bg-light p-3 mb-4 text-center">Change password</h3>
+    <form action="" method="POST" class="mx-2" onsubmit="return Validation()">
+        {% csrf_token %}
+        <span class="text-danger mb-2"></span>
+       {% render_field form.new_password1 id="pass1"  pattern="/^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$/g"  class="form-control" placeholder="Create password..." %}
+     {% render_field form.new_password2 id="pass2"  pattern="/^[a-zA-Z0-9!@#\$%\^\&*_=+-]{8,12}$/g"  class="form-control mt-3 mb-3" placeholder="Confirm password..." %}
+
+        <input type="submit" class="btn btn-success" value="Change" name="" id="">
+    </form>
+
+
+{% endblock content1%}
+
+ {% block js%}
+    <script>
+    const Validation=()=>{
+         let sp=document.querySelector("span")
+        let pass1=document.querySelector("form #pass1").value;
+        
+        let pass2=document.querySelector("form #pass2").value;
+
+    if(pass1!=pass2){
+       sp.innerHTML="password not match retry ?"
+     pass1.value="";
+     return false;
+              //alert("password not match retry ?")
+
+          }
+            if(pass1.length<6){
+
+       sp.innerHTML="Password must be at least 6 character long."
+            //alert( "Password must be at least 6 character long.")
+              return false;
+          }
+
+
+        var passw=  /^[A-Za-z]\w{7,14}$/;
+        if(pass1.match(passw)) 
+        { 
+        return true;
+        }
+        else
+        { 
+        alert('invalid password pattern...!!')
+        return false;
+        }
+
+    }
+        console.log("Working password")
+    </script>
+    {% endblock js %}

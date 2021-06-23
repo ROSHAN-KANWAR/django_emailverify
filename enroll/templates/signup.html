@@ -1,0 +1,145 @@
+{% extends 'base.html'%}
+{% load static%}
+{%block title%}SIGN_UP_PAGE{% endblock %}
+ {% block content%}
+<div class="container">
+      <div class="row">
+<div class="col-md-3"></div>
+       <div class="col-md-6  mt-4 bg-light p-4">
+            {% if messages %}
+        {% for mes in messages %}
+
+        <p {% if mes.tags %} class="alert alert-{{mes.tags}}" {%endif%} >
+            {{mes}}
+        </p>
+                   {%endfor%}
+        {% endif%}
+        <form action="" method="post" enctype="multipart/form-data" onsubmit="return Validation()">
+      {% csrf_token%}
+<div class="mb-3 us">
+  <label  class="form-label">Username :</label>
+  <input type="text" name="username" id="floatinguser"  class="form-control"  placeholder="Username...">
+   <span>
+            <p class="uname text-danger"></p>
+            </span>
+            </div>
+
+            <div class="mb-3 un">
+  <label for="exampleFormControlInput1"  class="form-label">Name :</label>
+  <input type="text" name="name" id="floatinguser1"` class="form-control" id="exampleFormControlInpudt1" placeholder="enter name...">
+ <span>
+            <p class="nname text-danger"></p>
+            </span>
+</div>
+                  <div class="mb-3 ems">
+  <label for="exampleFormControlInpaut1" class="form-label">Email address</label>
+  <input type="email" name="email" class="form-control" id="emailvali" placeholder="name@example.com">
+ <span>
+            <p class="emname text-danger"></p>
+            </span>
+</div>
+
+<div class="mb-3 ps">
+  <label  class="form-label">Password :</label>
+  <input type="password" name="password" id="pass1" class="form-control"  placeholder="Create password..">
+   <span>
+            <p class="pname text-danger"></p>
+            </span>
+            </div>
+             <p>Already have an account <a href="{% url 'login' %}">login</a> </p>
+
+      <button type="submit" class="btn btn-outline-success col-md-12 col-sm-12 col-12">Sign in</button>
+     </form>
+       </div>
+<div class="col-md-3"></div>
+      </div>
+    <div class="row">
+    <div class="col">
+<div class="card-footer bg-light mt-3 mx-2">
+    © 2021 TechnosDeveloper. All Rights Reserved.  <span> <b><a href="https://www.linkedin.com/in/roshan-kanwar-b80150170?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BD4K5vmw1SnCpfUu9Ux8NrQ%3D%3D" target="_blank"><i class="fab fa-linkedin text-primary mx-3 text-priamry"></i></a>
+    <a href="https://github.com/ROSHAN17052?tab=repositories" target="_blank"> <i class="fab fa-github mx-3 text-secondary"></i></a>
+    <i class="fab fa-facebook text-primary mx-3"></i></b></span>
+</div>
+    </div>
+</div>
+</div>
+{% endblock content%}
+
+        {% block js%}
+    <script>
+        console.log("validations working signup form")
+              const Validation=()=>{
+      
+        let mainu=document.querySelector(".us #floatinguser").value;
+        
+        let mainn=document.querySelector(".un #floatinguser1").value;
+        
+        let pass1=document.querySelector(".ps #pass1").value;
+
+        let emails=document.querySelector(".ems #emailvali").value;
+        
+         //username 
+          if(mainu==""){
+              let sp=document.querySelector("span .uname")
+              sp.innerHTML="Username must be filled out"
+              return false;
+          }
+         
+          if(!isNaN(mainu)){
+                let sp = document.querySelector("span .uname")
+              sp.innerHTML = "**only character are allowed"
+              return false
+          }
+           //name
+                if(mainn==""){
+              let sp=document.querySelector("span .nname")
+              sp.innerHTML="Name must be filled out"
+              return false;
+          }
+
+          if(!isNaN(mainn)){
+                let sp = document.querySelector("span .nname")
+              sp.innerHTML = "**only character are allowed"
+              return false
+          }
+
+          //password
+          if(pass1.length<6){
+            let sp = document.querySelector("span .pname")
+              sp.innerHTML = "Password must be at least 6 character long."
+              return false
+          }
+
+     var passw=  /^[A-Za-z]\w{7,14}$/;
+        if(pass1.match(passw)) 
+        { 
+        return true;
+        }
+        else
+        { 
+        alert(' invalid password pattern...!')
+        return false;
+        }
+
+
+           ///email
+
+  var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if(emails.match(mailformat))
+    {
+    return true;
+    }
+
+      else
+      {
+      alert("You have entered an invalid email address!");
+
+      return false;
+      }
+
+
+
+              }
+
+    </script>
+    {% endblock js %}

@@ -1,0 +1,75 @@
+{% extends 'profile.html'%}
+{% load static %}
+{% load widget_tweaks %}
+ {% block content1%}
+
+<h3 class="text-center bg-light p-2">Profile Update</h3>
+<form action="" method="POST" novalidate class=" p-2 mx-3"  onsubmit="return Validation()">
+    {% csrf_token %}
+ Username :{% render_field fm.username  id="ut_name" class="form-control mb-2"  %}
+<span>
+            <p class="utname text-danger"></p>
+            </span>
+ First Name :{% render_field fm.first_name id="ft_name" class="form-control mb-2" %}
+ <span>
+            <p class="uname text-danger"></p>
+            </span>
+  Last Name :{% render_field fm.last_name id="lt_name"  class="form-control mb-2" placeholdel="enter last name..." %}
+<span>
+            <p class="lname text-danger"></p>
+            </span>
+        <input type="submit" value="Save" class="btn btn-success" name="" id="">
+            </form>
+
+{% endblock content1%}
+   {% block js%}
+    <script>
+      const Validation=()=>{
+        let mainn=document.querySelector("form #ft_name").value;
+        
+        let mainu=document.querySelector("form #ut_name").value;
+        let mainl=document.querySelector("form #lt_name").value;
+    
+    //username
+                if(mainu==""){
+              let sp=document.querySelector("span .utname")
+              sp.innerHTML="**please fill username"
+              return false;
+          }
+         
+          if(!isNaN(mainu)){
+                let sp = document.querySelector("span .utname")
+              sp.innerHTML = "**only character are allowed"
+              return false
+          }   
+      //first_name
+                if(mainn==""){
+              let sp=document.querySelector("span .uname")
+              sp.innerHTML="**please fill username"
+              return false;
+          }
+
+      if(!isNaN(mainn)){
+            let sp = document.querySelector("span .uname")
+          sp.innerHTML = "**only character are allowed"
+          return false
+      }
+         //last_name
+
+                if(mainl==""){
+              let sp=document.querySelector("span .lname")
+              sp.innerHTML="**please fill username"
+              return false;
+          }
+
+        if(!isNaN(mainl)){
+              let sp = document.querySelector("span .lname")
+            sp.innerHTML = "**only character are allowed"
+            return false
+        }
+      
+      }
+        console.log("Working profile")
+
+    </script>
+    {% endblock js %}
